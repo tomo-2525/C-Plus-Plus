@@ -1,0 +1,50 @@
+値の書き換え禁止
+const int a  = 0;
+int const a2 = 0;    // 意味は同じ
+a = 1;      // コンパイルエラー
+
+
+
+ポインタの指す値の書き換え禁止
+int b = 0;
+const int * p_b  = &b;
+int const * p_b2 = &b;    // 意味は同じ
+p_b = &b;           // OK
+(*p_b) = b;         // コンパイルエラー
+
+
+
+ポインタの書き換え禁止
+int c = 0;
+int * const p_c = NULL;
+p_c = &c;       // コンパイルエラー
+(*p_c) = c;     // OK
+
+
+
+ポインタ、ポインタの指す値の両方の書き換え禁止
+int d = 0;
+const int * const p_d = NULL;
+p_d = &d;       // コンパイルエラー
+(*p_d) = &d;    // コンパイルエラー
+
+
+void func(car &o)
+{
+    o.speed += 50; // ok
+}
+void func_2(const car &o)
+{
+    o.speed += 50; // compile-time error
+}
+
+int main()
+{
+    Obj o1;
+    const Obj o2;
+    f1(o1); // ok
+    f1(o2); // ok
+    f2(o1); // ok
+    f2(o2); // compile-time error
+}
+

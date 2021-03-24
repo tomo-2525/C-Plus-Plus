@@ -1,0 +1,34 @@
+/***************/
+/* malloc/free */
+/***************/
+c++では、推奨されない
+ Feature                  | malloc/free                   
+--------------------------+-------------------------------
+ Memory allocated from    | 'Heap'                        
+ Returns                  | void*                         
+ On failure               | Returns NULL                  
+ Required size            | Must be specified in bytes    
+ Handling arrays          | Requires manual calculations  
+ Reallocating             | Simple (no copy constructor)  
+ Call of reverse          | No                            
+ Low memory cases         | Not handled by user code      
+ Overridable              | No                            
+ Use of (con-)/destructor | No                            
+
+
+/**************/
+/* new/delete */
+/**************/
+ Feature                  | new/delete                     
+--------------------------+--------------------------------
+ Memory allocated from    | 'Free Store'                   
+ Returns                  | Fully typed pointer            
+ On failure               | Throws (never returns NULL)    
+ Required size            | Calculated by compiler         
+ Handling arrays          | Has an explicit version        
+ Reallocating             | Not handled intuitively        
+ Call of reverse          | Implementation defined         
+ Low memory cases         | Can add a new memory allocator 
+ Overridable              | Yes                            
+ Use of (con-)/destructor | Yes                            
+

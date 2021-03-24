@@ -1,0 +1,33 @@
+class Point
+{
+public:
+    Point(float x, float y); // 直交座標
+    Point(float r, float t); // 曲座標
+};
+int main()
+{
+    Point p(1.0, 3.0); 
+    // どっちのコンストラクタを呼んでいいかわからないのでコンパイルエラー
+}
+
+/***********************************************/
+/* named-constructor (名前付きコンストラクター)*/
+/***********************************************/
+C++ では、コンストラクタはパラメータの型、順序、数（シグネクチャ）によってのみ互いに区別される。もちろん、クラスが複数のコンストラクタを持つ時、それぞれのコンストラクタは異なる目的を持っている。しかし、C++ ではクラスのインタフェースに対して 意味的な 違いを表現することは困難である。なぜなら全てのコンストラクタは同じ名前を持ちパラメータによってのみ区別されうるからである。パラメータの型、順序、数のみが異なる多数のコンストラクタ呼び出しを伴うコードを読むことは、クラスのオリジナルな作者以外には非常に非直感的なものとなる。名前付きコンストラクタ(Named Constructor)イディオムはこの問題に対処する。
+※これは、オブジェクトを生成するものなので、staticにしないと呼び出すことができないので、必ずstaticで宣言しなければならない。
+
+class Point
+{
+public:
+    // 直交座標のコンストラクタ
+    static Point createFromCart(float x, float y); 
+    // 曲座標のコンストラクタ
+    static Point createFromPolar(float r, float t);
+
+private:
+    Point(float x, float y); // Cart coord float x, y; // Cart coord
+};
+int main()
+{
+    Point p1 = Point::createFromCart(1.0, 3.0);
+}

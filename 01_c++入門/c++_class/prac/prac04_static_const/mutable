@@ -1,0 +1,9 @@
+class A{ 
+public:
+    int day;
+int get_day() const { return day; } // const member function
+void set_day(int d) { day = d; } // non-const member function
+};
+
+constメソッドは、オブジェクトのフィールドを変更できない。
+constメソッドから特定のオブジェクトの特定のフィールドを変更できるようにすることができる。

@@ -1,0 +1,51 @@
+- トライブロックの後にキャッチされなかった場合、例外は次のレベルに進みます。
+- 次のレベルのトライブロック (入れ子になっている場合)
+- 例外が発生した関数呼び出しを囲むブロックを試す
+- どのレベルでも捕捉されなかった場合、プログラムは終了します（C++では terminate() が呼び出されることを保証しています）
+
+RAII(Resource Acquisition IS Initialization)
+リソースの確保と変数の初期化，リソースの解放と変数の破棄を紐付ける
+
+/************/
+/* auto_ptr */
+/************/
+C++11 で非推奨で削除予定。C++11 以降が使える環境では、unique_ptr や shared_ptr といった、新しい仕組みを使用してください。
+auto_ptr は、new によって動的に確保されたメモリ領域の解放忘れを防ぐクラステンプレートです。使用する際には、<memory> という標準ヘッダのインクルードが必要です。
+#include <iostream>
+#include <memory>
+
+int main()
+{
+    std::auto_ptr<int> p(new int(100));
+
+    std::cout << *p << std::endl;
+}  // auto_ptr のデストラクタが呼び出されて、delete される
+
+/**************/
+/* unique_ptr */
+/**************/
+#include<memory>
+int main(){
+  std::cout << "ここはまだなにもない" << std::endl;
+  {
+    std::unique_ptr<int> ptr = new int(3);
+    std::cout << "ここでメモリを確保かつ変数を初期化" << std::endl;
+    std::cout << *ptr << std::endl;
+  }//!Here!
+  std::cout << "ptrはもう存在しない" << std::endl;
+}
+Hereで変数の破棄とリソースの開放が行われる
+unique_ptrを使わないと以下のようになる。
+
+int main(){
+  std::cout << "ここはまだなにもない" << std::endl;
+  {
+    int* ptr = new int(3);
+    std::cout << "ここでメモリを確保かつ変数を初期化" << std::endl;
+    std::cout << *ptr << std::endl;
+    delete ptr;//メモリを解放
+  }//ptrを破棄
+  std::cout << "ptrはもう存在しない" << std::endl;
+}
+
+

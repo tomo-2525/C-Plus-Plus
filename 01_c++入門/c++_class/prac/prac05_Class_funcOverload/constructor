@@ -1,0 +1,57 @@
+コンストラクタとは、オブジェクトを作成するために使われるメンバ関数です。
+コストラクタとクラス名は同じです
+
+
+・デフォルトコンストラクタ
+→引数を１つも取らないコンストラクタ、デフォルト値の引数を持つことはできる。
+コンストラクタを１つも定義しない場合は、コンパイラがデフォルトコンストラクタを定義する
+
+・変換コンストラクタ (Conversion consutructor)
+→引数を１つだけ受け取るコンストラクタ。コピーコンストラクタとムーブコンストラクタも変換コンストラクタ。
+一つの引数を受け取り、それをクラスを生成することから変換コンストラクタと呼ばれる。
+
+・コピーコンストラクタ
+→変換コンストラクタの一つである。コピーコンストラクタが定義されない場合は、コンパイラが定義する。この自動で定義されるコピーコンストラクタはbit copyを行う。ポインタであるフィールドを持つ場合正しくコピーされない。
+コンストラクタの引数と生成するオブジェクトの型が一緒なので、コピーコンストラクタと呼ばれる。
+そのクラスの参照（引数が＆で宣言）だけを受け取るコンストラクタ
+
+・ムーブコンストラクタ
+→そのクラスの参照（引数が＆＆で宣言）だけを受け取るコンストラクタ
+
+ArrayStack stack1 = ArrayStack();  
+default constructor
+→ArrayStack() is called
+
+ArrayStack stack2 = ArrayStack(5);
+explicit ArrayStack(int allocated_size) is called
+
+ArrayStack stack3(stack1);
+Copy Constructor
+→ArrayStack(const ArrayStack &obj)is called
+
+ArrayStack stack4 = stack2;
+Copy Constructor
+→ArrayStack(const ArrayStack &obj)is called
+
+ArrayStack stack5;
+default constructor
+→ArrayStack() is called
+
+stack5 = stack1;
+Assignment Operator
+→&ArrayStack::operator=(const &obj) is called
+
+ArrayStack stack6(10);
+explicit ArrayStack(int allocated_size) is called
+
+stack6 = stack6;
+Assignment Operator
+→&ArrayStack::operator=(const &obj) is called
+
+ArrayStack stack7 = std::move(stack5);
+Move Constructor
+→ArrayStack(const ArrayStack &&obj)is called
+
+stack6 = std::move(stack2);
+Move assignment operator
+→&ArrayStack::operator=(const &&obj) is called

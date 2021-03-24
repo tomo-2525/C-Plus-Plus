@@ -1,0 +1,33 @@
+static member(静的メンバー)には、静的フィールドと静的メソッドがある。
+メンバーにstaticをつけることによって、クラスにメンバの実態ができる。
+通常、メンバが格納されるメモリは、各インスタンスに用意されるが、静的メンバは、クラスにある実態のアドレスをさすコピーが準備される。つまり、インスタンスで静的メンバをいじることによってクラスにある実態のほうも値が変わる。またメソッドはインスタンス化しないと使えないが、静的メソッドはクラスに実態があるために、インスタンス化しなくてもメソッドが使える。
+
+静的フィールドはクラスの定義では、初期化ができない。クラス定義の外で必ず定義しなければならない。
+初期化しようとするとコンパイルエラーになる。ただし例外があり、constをつける場合は、staticでもコンパイルエラーには、ならない
+class Cars
+{
+private:
+    static int num_produced;
+
+public:
+    Cars() { num_produced++; }
+    static int get_num_produced(){return num_produced;}
+};
+
+int Cars::num_produced = 0;
+int main()
+{
+    cout << Cars::get_num_produced() << endl;  // 0
+    Cars c1;
+    cout << Cars::get_num_produced() << endl;  // 1
+    Cars c2;
+    cout << Cars::get_num_produced() << endl;  // 2
+}
+
+/********/
+/* 例外 */
+/********/
+class ConstantExample{
+private:
+    static const int constant = 137; 
+};

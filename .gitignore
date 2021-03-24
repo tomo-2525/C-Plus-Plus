@@ -35,3 +35,6 @@ a.out
 *.app
 
 build/
+
+# class pdf
+01_c++入門/c++_class/*/*.pdf

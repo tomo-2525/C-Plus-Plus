@@ -1,0 +1,48 @@
+forward_declaration（前方宣言）とは、クラスが定義される前にそのクラス名を利用するた目のものです。
+・ヘッダーでの別のヘッダのインクルードを減らす
+・相互参照を実現する
+
+class Node; // forward declaration
+class Stack { 
+    public:
+        Node* top; // ok
+        Node a_node; // compile error 
+};
+
+【インクルードだと相互参照を実現できない】
+// A.h
+#include "B.h"
+class A
+{
+public:
+    B* m_pB;
+};
+
+// B.h
+#include "A.h"
+class B
+{
+public:
+    A* m_pA;
+};
+
+
+
+【クラスの前方宣言だと相互参照を実現できる】
+// A.h
+// #include "B.h"
+class B; // 前方宣言
+class A
+{
+public:
+    B* m_pB;
+};
+
+// B.h
+// #include "A.h"
+class A; // 前方宣言
+class B
+{
+public:
+    A* m_pA;
+};

@@ -1,0 +1,24 @@
+overloadできるオペレイター
+=                  assignment operator
++, −, ∗, /, %      arithmetic operators
++=, −=, ∗=, /=, %= compound arithmetic operators 
+−                  unary minus
+∧, &, |            bitwise boolean operators (binary)
+∼                  bitwise negation (unary)
+&&, ∥              boolean operators (binary)
+!                  boolean negation (unary)
+<, <=, ==, >, >=, ! = comparison operators 
+[]                 element selection operator
+++, −−              increment and decrement operators 
+∗, →                dereferencement operators
+≪, ≫                stream operators
+()                  (function) call operator 
+new, new[], delete, delete[]
+
+overloadできないオペレイター
+:: scope resolution
+. member selection
+? : ternary conditional
+.∗ pointer to member selection
+”sizeof” size of object
+”typeid” runtime type information operator

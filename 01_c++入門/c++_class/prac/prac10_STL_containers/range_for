@@ -1,0 +1,14 @@
+void f(vector<double>& v){ 
+  for (auto x : v) {
+    // do something with x
+    // x is a copy of the container’s element
+  }
+  for (auto& x : v) {
+    // do something with x
+    // x is a reference to the container’s  element 
+  }
+  for (const auto& x : v) {
+    // do something (read only) with x
+    // x is a reference to the container’s element 
+  }
+}

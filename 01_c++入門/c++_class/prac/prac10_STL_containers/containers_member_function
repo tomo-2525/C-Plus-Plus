@@ -1,0 +1,34 @@
+/**************************/
+/* stack・queue operation */
+/**************************/
+push_back() Add to end (not for forward_list)
+push_front() Add at the beginning (for list,forward_list and deque only)
+pop_back() Remove first element (for list, forward_list and deque only)
+pop_front() Remove first element (for list, forward_list and deque only)
+emplace_back() Add to end; forwarding the arguments to the constructor of the contained type (not for forward_list) 
+emplace_front() Add at the beginning (for list, forward_list and deque only)
+
+
+/******************/
+/* list operation */
+/******************/
+insert(p, x)             Add x before p(p is an iterator, X an element)                    
+insert(p, n, x)          Add n copies of x before p
+insert(p, first, last)   Add elements in [first; last( before p
+emplace(p, args)     Insert before p; args are forwarded to the constructor of the contained type
+erase(p)                erase element at p
+erase(first, last)      erase element in [first; last(
+clear()                 Erase all elements in the container
+
+/***************/
+/* constructor */
+/***************/
+container()                 Construct an empty container
+container(n)                n element  (not for assoc container)
+container(n, x)             n copies of x (not for assoc container)
+container(first, last)      Use elements from [first; last)
+container(c)                Copy ctor: use elements from c
+~container()                destructor
+
+
+

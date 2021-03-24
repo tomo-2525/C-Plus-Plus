@@ -1,0 +1,99 @@
+/**************/
+/* ポインター */
+/**************/
+
+// ポインタ基本
+ポインター：変数のアドレスを格納する変数
+int *x,*y;   int型ポインタ変数x,yの定義
+int *x,y と定義するとint型ポインタx、int型変数yが定義される 
+int z=2;     int型変数zの定義
+x = &z;      zのアドレスをxに格納
+*x           xに格納されているアドレスにある値を参照する(ここでは２)
+y = x;       xに格納されているアドレスをyに代入（ここでは２）
+
+// ポインタの参照
+string tmp = "hoge";
+string *myString = &tmp;
+cout << *myString.length() << endl; //  エラー
+.は*よりも優先順位が高い。*(mystring.length())と同じになる
+cout << (*myString).length() << endl; // 4
+cout << myString->length() << endl; // 4
+
+// 変数の定義
+int x = 2;           何も付けないと静的に割り当てる（スタック領域）
+int *y = new int;    newをつけると動的に割り当てる（ヒープ領域）
+
+// nullptr
+「NULL」と「nullptr」はポインタに格納されている値が「何もない」とか「空である」という意味
+NULLは、マクロで定義してあり単なる数値０である
+NULLは、long型０であるが、nullptrは、std::nullptr_t型であり、代入した型のポインタになる。
+
+// 配列のポインタ
+int a[5] = {1, 2, 3, 4, 5};
+int *a_p = a; // 配列名は配列の先頭のアドレスを表す
+cout << a_p[1] << endl;         // 2 
+cout << 1 [a_p] << endl;        // 2 
+cout << (a_p + 1)[0] << endl;   // 2 
+cout << *(a_p + 1) << endl;     // 2 
+cout << *(&a_p[0] + 1) << endl; // 2 
+delete[] a_p;     
+// 配列の割り当てしたメモリを開放する時はdelte[]を使う
+// 先頭のアドレスを渡さないとエラーが生じる
+
+//多次元配列
+int m[3][5];  // 3 rows and 5 columns
+
+int **m;
+m = new int*[s1];
+for(int i=0; i<s1; ++i){
+    m[i]=new int[s2];
+}
+for (int i=0; i<s1; ++i){
+    delete[] m[i]; 
+    delete[] m;
+}
+
+
+/********/
+/* 参照 */
+/********/
+
+// 参照の基本
+参照とは、変数のエイリアス（別名をつける）みたいなもの
+int j = 1;
+int &k = j;
+cout << "j:" << j << " k:" << k << endl; // j:1 k:1
+j += 10;
+cout << "j:" << j << " k:" << k << endl; // j:11 k:11
+k += 10;
+cout << "j:" << j << " k:" << k << endl; // j:21 k:21
+
+int *p = &k;
+cout << "*p:" << *p << endl; // *p:21
+
+int a = 0;
+cout << "a:" << a << endl; // a:0
+inc(a);
+cout << "a:" << a << endl; // a:1
+
+// 参照を使う理由
+関数に引数を渡す場合は、コピーが渡される。大きなオブジェクトを渡す場合はメモリを大きく消費するために参照を使うことによってアドレスが渡されメモリ消費を抑えることができる。※関数を呼び出す時は、アドレスを渡さないので注意が必要
+
+// L-value Reference VS R-value reference
+&  で宣言される参照型を左辺値参照(L-value Reference)
+代入式の左側にくることができる値のこと。この名前は上の理由から慣習的についたものであるが、当然右辺にくることもある。
+
+&& で宣言される参照型を右辺値参照(R-value reference)
+左辺値を右辺値参照にキャストすることで一時オブェクトと同じ扱いをさせることができる。リテラルや、参照を返す関数を除く関数の戻り値。
+
+int x = 0;
+int& lvalue_ref_1 = x;           // OK
+int& lvalue_ref_2 = 0;           // Error 右辺値を左辺値参照で束縛している
+
+int&& rvalue_ref_1 = x;          // Error 左辺値を右辺値参照で束縛している
+int&& rvalue_ref_2 = 0;          // OK
+
+const int& const_lvalue_ref_1 = x;    // OK
+const int& const_lvalue_ref_2 = 0;    // OK constな左辺値参照は右辺値を束縛できる
+
+

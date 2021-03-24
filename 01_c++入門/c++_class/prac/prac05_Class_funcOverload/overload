@@ -1,0 +1,15 @@
+void print(double); 
+void print(long);
+
+void f() {
+print(1L); // print(long) 
+print(1.0); // print(double) 
+print(1); // error: ambiguous
+}
+
+//デフォルト引数は、通常の引数よりも全て右側にないとコンパイルエラーになる
+void f(int a, int b = 1) { } 
+int main() {
+f(2);
+f(2, 5); 
+}

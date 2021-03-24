@@ -1,0 +1,86 @@
+streamとは、C++の標準ライブラリである。
+ストリームには、３つのタイプがある
+/**************/
+/* IO streams */
+/**************/
+<iostream>をインクルードする
+略
+
+/****************/
+/* File streams */
+/****************/
+<fstream>をインクルードする
+
+//入力ファイル
+・ファイルのオープンとクローズの仕方
+ifstream input("file.txt");
+input.close();
+or
+ifstream input;
+input.open("file.txt"); 
+input.close();
+
+・ファイルが開けているかを確認する
+ifstream input("file.txt"); 
+if (!input.is_open()) {
+  cerr << "can not open file" << endl;
+  exit(1); 
+}
+
+//出力ファイル
+ofstream ouput("save.txt"); //save.txtが無ければ作られ、有れば上書きされる
+ofstream output("save.txt", ios_base::app); //追記したい場合はこれ
+
+
+string fileName = "file.txt"; 
+ifstream input(fileName.c_str()); //StringからChar*に変換してinputのコンストラクタに渡す。
+
+stoi	文字列からint型への変換(function)	
+stol	文字列からlong型への変換(function)	
+stoul	文字列からunsigned long型への変換(function)
+stoll	文字列からlong long型への変換(function)	
+stoull	文字列からunsigned long long型への変換(function)	
+stof	文字列からfloat型への変換(function)	
+stod	文字列からdouble型への変換(function)
+stold	文字列からlong double型への変換(function)	
+to_string	数値からstringへの変換(function) //string to_string(int val);
+to_wstring	数値からwstringへの変換(function)
+
+// 標準入力から１行ずつ読みこむ
+ifstream fin("some_file.txt"); 
+string line;
+getline(fin, line);
+
+// ファイルの内容を、１行ずつ読み込む
+ifstream fin("some_file.txt"); 
+while (!fin.eof()) {
+  string line;
+  getline(fin, line);
+}
+
+/******************/
+/* String streams */
+/******************/
+<sstream>をインクルードする
+
+// JavaではできるがC++だとできないこと
+string data;
+  data = "append some data " + 122;
+  cout << data << endl;
+
+これを実現するために、stringstreamを使用する
+stringstream ssdata;
+ssdata << "append some data " << 122; cout << ssdata.str() << endl;
+
+もちろん、stringstreamを使わずにint型をstring型に変換して同じ処理をすることができる
+string data;
+data = "append some data " + to_string(122); 
+cout << data << endl;
+
+// 
+string sentence = "Example of a sentence";
+stringstream ss(sentence);
+string word;
+while (ss >> word) {
+  cout << word << "\n";
+}

@@ -1,0 +1,29 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+    // true,falseのシンボル表現
+    cout << true << endl;              // 1
+    cout << boolalpha << true << endl; // true
+
+    // dec,hex,oct(10進、16進、8進)
+    cout << 10 << endl;        // 10
+    cout << hex << 10 << endl; // a
+    cout << oct << 10 << endl; // 12
+
+    // フィールドの文字数指定(次のフィールドにしか影響しない)
+    cout << "hello" << endl;             // hello
+    cout << setw(10) << "hello" << endl; //     hello
+
+    // 左寄せ、右寄せ
+    cout << setw(10) << left << "hogehoge" << endl; //hogehoge
+    cout << setw(10) << right << "hogehoge" << endl; //   hogehoge
+
+    // パティング文字
+    cout << setfill('0') << setw(5) << 11 << endl; // 00011
+
+    return 0;
+}
